@@ -1,39 +1,71 @@
 # Unit 14 Sequelize Homework: Reverse Engineering Code
-
-Reverse engineer the starter code provided and create a tutorial for the code.
-
-In the `Develop` folder, there is starter code for a project. Begin inspecting the code to get an understanding of each file's responsibility. Then, in a text file of your choice, write a tutorial explaining *every* file and its purpose. If one file is dependant on other files, be sure to let the user know.
-
-At the end of the tutorial, add instructions for how you could now add changes to this project.
-
-Following the [common templates for user stories](https://en.wikipedia.org/wiki/User_story#Common_templates), we can frame this challenge as follows:
-
-```
-AS A developer
-
-I WANT a walk-through of the codebase
-
-SO THAT I can use it as a starting point for a new project
-```
-
-## Business Context
-
-When joining a new team, you will be expected to inspect a lot of code that you have never seen before. Rather than having a team member explain every line for you, you will dissect the code by yourself, saving any questions for a member of your team.
-
-## Acceptance Criteria
-
-```md
-GIVEN a Node.js application using Sequelize and Passport
-WHEN I follow the walkthrough
-THEN I understand the codebase
-```
-- - -
-
-## Submission on BCS
-
-You are required to submit the following:
-
-* A link to a file explaining the application in `Develop/`. 
-
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+## File Structure
+##1.  config
+## middleware
+###- isAuthenticaticated.js
+•	checks if the user is already authenticated
+### - config.json
+•	contains 3 json objects that define the database configuration
+### - passport.js
+•	requires passport npm package
+•	it uses LocalStrategy for email password authentication
+•	users will use email and password to sign in
+•	if there is no email in the DB, “incorrect email” is the message
+•	if incorrect password, “incorrect password” is the message
+•	if it passes authentication, the user object is returned
+## 2. models
+### - index.js
+•	sets up database with sequelized
+### - user.js
+•	requires bcrypt for password hashing
+•	creates the user model
+•	email – string type, can not be null, must be unique, must be email format
+•	password – string type, cannot be null
+•	validPassword function – validates password
+•	add.Hook function – runs user creation, and hashes out password
+##3.  public
+## js
+### - login.js
+•	uses jQuery
+•	ready function - initializes variables from the DOM inputs, loginForm, emailInput, passwordInput. Validates input of a email and password. If true, calls the loginUser function
+•	loginUser function – makes axios request to verifies email and password
+### - members.js
+•	ready function – sets up text of an html element with email of user
+### - signup.js
+•	ready function – like login.js
+•	signUpUser – creates a new user
+## stylesheets
+### - login.html
+•	main page for the application
+•	login form
+•	input for email and password
+•	login button
+•	or link to sign up
+### - members.html
+•	page displays after users successfully log in
+### - signup.html
+•	sign up page
+•	input for email and password
+•	link to login
+##4. routes
+### - api-routes.js
+•	it has 2 post routes
+•	/api/login – if the user verified password and email, the are directed to this route
+•	/api/signup – route to sign up the user, takes in the email and password and posts it to the DB
+•	2 get routes
+•	/api/logout – logs out user and redirects to the main screen
+•	/api/user_data – if the user is not logged in, it will return an empty json, otherwire, it will send back the user email and id
+### - html-routes.js
+•	checks if the user is logged in using middleware
+•	has 3 get routes
+•	/ - if user has an account, it redirects to the members page
+•	/login – after user logs in, redirect to members page
+•	/members – if user is not logged in and tries to access route, they will be redirected to signup page
+##5.  server.js
+•	Server file that puts everything together. 
+•	Requires all the NPM packages
+•	Sets up the ports
+•	Sets up middleware an express app
+•	Uses sessions to keep track of login status
+•	Pull sin all the routes
+•	Syncs database
