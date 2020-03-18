@@ -1,8 +1,8 @@
 # Unit 14 Sequelize Homework: Reverse Engineering Code
 ## File Structure
-##1.  config
+## 1.  config
 ## middleware
-###- isAuthenticaticated.js
+### - isAuthenticaticated.js
 •	checks if the user is already authenticated
 ### - config.json
 •	contains 3 json objects that define the database configuration
@@ -23,7 +23,7 @@
 •	password – string type, cannot be null
 •	validPassword function – validates password
 •	add.Hook function – runs user creation, and hashes out password
-##3.  public
+## 3.  public
 ## js
 ### - login.js
 •	uses jQuery
@@ -47,7 +47,7 @@
 •	sign up page
 •	input for email and password
 •	link to login
-##4. routes
+## 4. routes
 ### - api-routes.js
 •	it has 2 post routes
 •	/api/login – if the user verified password and email, the are directed to this route
@@ -61,7 +61,7 @@
 •	/ - if user has an account, it redirects to the members page
 •	/login – after user logs in, redirect to members page
 •	/members – if user is not logged in and tries to access route, they will be redirected to signup page
-##5.  server.js
+## 5.  server.js
 •	Server file that puts everything together. 
 •	Requires all the NPM packages
 •	Sets up the ports
